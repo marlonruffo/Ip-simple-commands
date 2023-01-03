@@ -8,6 +8,7 @@ import colorama
 import ipaddress
 import ping3
 import subprocess
+import nmap
 
 
 from datetime import datetime
@@ -29,16 +30,18 @@ while True: # loop until the user enters a valid IP
 print(colorama.Fore.BLACK + "_"*82 + colorama.Style.RESET_ALL)
 print(colorama.Fore.BLUE + "1 - Scan de portas" + colorama.Style.RESET_ALL)
 print(colorama.Fore.BLUE + "2 - Verificar Classe do Ip" + colorama.Style.RESET_ALL)
-print(colorama.Fore.BLUE + "3 - Ping no Server" + colorama.Style.RESET_ALL)
-print(colorama.Fore.BLUE + "4 - Traceroute" + colorama.Style.RESET_ALL)
-print(colorama.Fore.BLUE + "5 - idk yet" + colorama.Style.RESET_ALL)
+print(colorama.Fore.BLUE + "3 - Ping no Ip" + colorama.Style.RESET_ALL)
+print(colorama.Fore.BLUE + "4 - Traceroute no Ip" + colorama.Style.RESET_ALL)
+print(colorama.Fore.BLUE + "5 - Hostname" + colorama.Style.RESET_ALL)
+print(colorama.Fore.BLUE + "6 - hosts disponíveis" + colorama.Style.RESET_ALL)
 
 print(colorama.Fore.RED + "5 - Sair" + colorama.Style.RESET_ALL)
 print(colorama.Fore.BLACK + "_"*82 + colorama.Style.RESET_ALL)
 
 option = input("Escolha uma opção: ")
 if option == "1":
-    qtdPorts = int(input("Enter the number of ports to scan: "))
+    start_port = int(input("Enter the start port to scan: "))
+    end_port = int(input("Enter the final port to scan: "))
     print("Scanning Target: " + target)
     start_time = datetime.now()
     print("Time Started: " + str(datetime.now()))
@@ -58,7 +61,7 @@ if option == "1":
         s.close()
 
     try:
-        for port in range(1, qtdPorts+1):
+        for port in range(start_port, end_port+1):
             t = threading.Thread(target=scan_port, args=(port,))
             threads.append(t)
             t.start()
@@ -140,4 +143,24 @@ if option == "4": # Traceroute - trace the path to the target
     print(colorama.Fore.BLACK + "_"*82 + colorama.Style.RESET_ALL)
     print("Done")
 if option == "5":
+    try:
+        hostname = socket.gethostbyaddr(target)
+        name = hostname[0]
+        ip = hostname[2]
+        ip_string = ', '.join(ip)
+        
+    except socket.herror:
+        print("Host not found")
+    else:
+        print("Hostname: " + name)
+        print("IP: " + ip_string)
+
+if option == "6":
+    ip=target
+    prefix_lenght = int(input("Digite o prefixo: "))
+    ip_network = ipaddress.IPv4Network((ip,prefix_lenght), strict=False)
+    num_hosts = ip_network.num_addresses-2
+    print("numero de hosts: " + str(num_hosts))
+
+if option == "7":
     sys.exit()
