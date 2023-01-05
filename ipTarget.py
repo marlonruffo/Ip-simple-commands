@@ -171,6 +171,24 @@ if option == "6":
     num_hosts = ip_network.num_addresses-2
     print("numero de hosts: " + str(num_hosts))
 
+
 if option == "7":
+# execute the nmap command and scan the network
+    nmap_output = subprocess.run(["nmap", "-sV", target], capture_output=True).stdout.decode()
+
+    # extract the open ports from the nmap output
+    open_ports = []
+    for line in nmap_output.split("\n"):
+        if "open" in line and "unrecognized" not in line:
+            open_ports.append(line)
+
+    # print the open ports
+    print(colorama.Fore.BLUE + "Informations of ports on host " + target + ":" + colorama.Style.RESET_ALL)
+    print(colorama.Fore.BLUE + "PORT   STATE  SERVICE        VERSION" + colorama.Style.RESET_ALL)
+    for port in open_ports:
+        print(colorama.Fore.BLACK + port + colorama.Style.RESET_ALL)
+
+
+if option == "8":
     print(colorama.Fore.RED + "Você escolheu sair do programa :(")
     sys.exit()
