@@ -27,18 +27,24 @@ while True: # loop until the user enters a valid IP
     break
   else:
     print(colorama.Fore.RED+"Invalid IP. Please try again.")
-    print(colorama.Fore.MAGENTA+"What do you want to do with the IP?: "+target+" ?")
-    print(colorama.Fore.RED + "1"+colorama.Fore.GREEN+ "- Check for open ports")
-    print(colorama.Fore.RED + "2"+colorama.Fore.GREEN+ "- Check the class of the IP")
-    print(colorama.Fore.RED + "3" +colorama.Fore.GREEN+"- Ping the target")
-    print(colorama.Fore.RED + "4"+colorama.Fore.GREEN+ "- Trace the route to the target")
-    print(colorama.Fore.RED + "5"+colorama.Fore.GREEN+ "- Get the hostname")
-    print(colorama.Fore.RED + "6"+colorama.Fore.GREEN+ "- Calculate Subnet")
-    print(colorama.Fore.RED + "7"+colorama.Fore.GREEN+ "- Get the MAC address")
-    print(colorama.Fore.RED + "8" +colorama.Fore.WHITE+ "- Exit" )
 
+print(colorama.Fore.MAGENTA+"What do you want to do with the IP?: "+target+" ?")
+print(colorama.Fore.RED + "1"+colorama.Fore.GREEN+ "- Check for open ports")
+print(colorama.Fore.RED + "2"+colorama.Fore.GREEN+ "- Check the class of the IP")
+print(colorama.Fore.RED + "3" +colorama.Fore.GREEN+"- Ping the target")
+print(colorama.Fore.RED + "4"+colorama.Fore.GREEN+ "- Trace the route to the target")
+print(colorama.Fore.RED + "5"+colorama.Fore.GREEN+ "- Get the hostname")
+print(colorama.Fore.RED + "6"+colorama.Fore.GREEN+ "- Calculate Subnet")
+print(colorama.Fore.RED + "7"+colorama.Fore.GREEN+ "- Get the MAC address")
+print(colorama.Fore.RED + "8" +colorama.Fore.WHITE+ "- Exit" )
 
-option = input(colorama.Fore.MAGENTA +"Choose an option: ")
+while True:
+    option = input(colorama.Fore.MAGENTA +"Choose an option: ")
+    if option in ["1", "2", "3", "4", "5", "6", "7", "8"]:
+        break
+    else:
+        print(colorama.Fore.RED+"Invalid option. Please try again.")
+
 if option == "1":
     print(colorama.Fore.MAGENTA + "You selected option 1:" +colorama.Fore.RED +"'Check for open ports'")
 
@@ -161,6 +167,7 @@ if option =="7":
 if option == "8":
     print(colorama.Fore.MAGENTA + "You selected option 8:" +colorama.Fore.RED+"'Exit'")
     print(colorama.Fore.GREEN+"Bye!")
+    time.sleep(2)
     sys.exit()
 
 
