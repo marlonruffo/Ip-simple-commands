@@ -9,23 +9,27 @@ import time
 import getmac
 
 
-from datetime import datetime
-pattern = r"\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b"
-regex = re.compile(pattern)
 
-colorama.init()
+
+
+from datetime import datetime
+#pattern garants that the ip is valid with the pattern: 0-255.0-255.0-255.0-255
+pattern = r"\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b"
+regex = re.compile(pattern) # compile the pattern to a regex object
+
+colorama.init() # initialize the colorama module
 another_option = True # variable to control the main loop
 while another_option: # main loop
     while True: # loop until the user enters a valid IP
-        target = input(str(colorama.Fore.MAGENTA+"Target IP: "))
+        target = input(str(colorama.Fore.MAGENTA+"Target IP: ")) # get the target IP from the user
 
     # check if the target matches the pattern
-        if regex.fullmatch(target):
+        if regex.fullmatch(target): # if the target matches the pattern
             print(colorama.Fore.GREEN+"Valid IP")
             print(colorama.Fore.MAGENTA+"Wait a moment...")
             time.sleep(1.5)
             break
-        else:
+        else: # if the target doesn't match the pattern
             print(colorama.Fore.RED+"Invalid IP. Please try again.")
     print(colorama.Fore.MAGENTA+"What do you want to do with the IP?: "+target+" ?")
     print(colorama.Fore.RED + "1"+colorama.Fore.GREEN+ "- Check for open ports")
@@ -38,12 +42,12 @@ while another_option: # main loop
     print(colorama.Fore.RED + "8" +colorama.Fore.WHITE+ "- Exit" )
 
     
-    while True:
+    while True: # loop until the user enters a valid option
         option = input(colorama.Fore.MAGENTA + "Choose an option: ")
         if option.isdigit() and 1 <= int(option) <= 8:
-        # option is a valid number between 1 and 8
-            break
-        else:
+        
+            break # if the option is a valid number between 1 and 8, break the loop
+        else: # option is not a valid number between 1 and 8
             print("Invalid option. Please try again.")
     if option == "1":
         print(colorama.Fore.MAGENTA + "You selected option 1:" +colorama.Fore.RED +"'Check for open ports'")
@@ -51,7 +55,7 @@ while another_option: # main loop
         print(colorama.Fore.GREEN+"Scanning Target: " + target)# print the ip of the target
         start_time = datetime.now() # store the start time
         print(colorama.Fore.GREEN+"Time Started: " + str(datetime.now()))
-        print(colorama.Fore.MAGENTA+"it might take a while Wait a moment...")
+        print(colorama.Fore.MAGENTA+"it might take a while. Please wait a moment...")
     # execute the nmap command and scan the network
         nmap_output = subprocess.run(["nmap", "-sV", target], capture_output=True).stdout.decode()# capture the output of the nmap command
         # extract the open ports from the nmap output
@@ -72,7 +76,7 @@ while another_option: # main loop
         print(colorama.Fore.MAGENTA +"Total time taken to read all the ports: {}".format(
             total_time_formatted)+colorama.Fore.MAGENTA +" seconds")  # print the total time taken
         while True: # loop until the user enters a valid input
-            another_option = input(colorama.Fore.MAGENTA + "Do you want to do another option (y/n)? ")
+            another_option = input(colorama.Fore.MAGENTA +  "Do you want to do another option or change the IP target? (y/n)")
             if another_option in ["y", "n"]:
                 break
             else:
@@ -114,8 +118,8 @@ while another_option: # main loop
             print(colorama.Fore.MAGENTA+"Could not determine the class of the IP address")
 
         while True:
-            another_option = input(colorama.Fore.MAGENTA + "Do you want to do another option (y/n)? ")
-            if another_option in ["y", "n"]:
+            another_option = input(colorama.Fore.MAGENTA +  "Do you want to do another option or change the IP target? (y/n)")
+            if another_option in ["y", "n"]: 
                 break
             else:
                 print(colorama.Fore.RED+"Invalid input. Please try again.")
@@ -138,7 +142,7 @@ while another_option: # main loop
         else:
             print(colorama.Fore.RED+"STATUS: "+colorama.Fore.GREEN+"Host is up")
         while True:
-            another_option = input(colorama.Fore.MAGENTA + "Do you want to do another option (y/n)? ")
+            another_option = input(colorama.Fore.MAGENTA +  "Do you want to do another option or change the IP target? (y/n)")
             if another_option in ["y", "n"]:
                 break
             else:
@@ -151,7 +155,7 @@ while another_option: # main loop
 
     if option == "4": # Traceroute - trace the path to the target
         print(colorama.Fore.MAGENTA + "You selected option 4:"+colorama.Fore.RED+ "'Trace the route to the target'")
-        print(colorama.Fore.MAGENTA+"Wait...")
+        print(colorama.Fore.MAGENTA+"it might take a while. Please wait a moment...")
         ip = target
         traceroute = subprocess.run(["tracert", ip], capture_output=True)
         try: # Try to decode the output as UTF-8
@@ -164,7 +168,7 @@ while another_option: # main loop
         print(colorama.Fore.MAGENTA+"Done")
         print(colorama.Fore.BLACK + "_"*82 + colorama.Style.RESET_ALL)
         while True:
-            another_option = input(colorama.Fore.MAGENTA + "Do you want to do another option (y/n)? ")
+            another_option = input(colorama.Fore.MAGENTA +  "Do you want to do another option or change the IP target? (y/n)")
             if another_option in ["y", "n"]:
                 break
             else:
@@ -189,7 +193,7 @@ while another_option: # main loop
             print(colorama.Fore.RED+"Hostname: "+colorama.Fore.GREEN + name)
             print(colorama.Fore.RED+"IP: " +colorama.Fore.GREEN+ ip_string)
         while True:
-            another_option = input(colorama.Fore.MAGENTA + "Do you want to do another option (y/n)? ")
+            another_option = input(colorama.Fore.MAGENTA +  "Do you want to do another option or change the IP target? (y/n)")
             if another_option in ["y", "n"]:
                 break
             else:
@@ -217,7 +221,7 @@ while another_option: # main loop
         num_hosts = len(list(ip_network.hosts()))
         print(colorama.Fore.RED + "Number of available hosts: " + colorama.Fore.GREEN + str(num_hosts))
         while True:
-            another_option = input(colorama.Fore.MAGENTA + "Do you want to do another option (y/n)? ")
+            another_option = input(colorama.Fore.MAGENTA +  "Do you want to do another option or change the IP target? (y/n)")
             if another_option in ["y", "n"]:
                 break
             else:
@@ -237,7 +241,7 @@ while another_option: # main loop
         else:
             print(colorama.Fore.RED+"Unable to retrieve MAC address for the given IP")
         while True:
-            another_option = input(colorama.Fore.MAGENTA + "Do you want to do another option (y/n)? ")
+            another_option = input(colorama.Fore.MAGENTA +  "Do you want to do another option or change the IP target? (y/n)")
             if another_option in ["y", "n"]:
                 break
             else:
@@ -247,10 +251,9 @@ while another_option: # main loop
         else:
             print(colorama.Fore.MAGENTA+"Thank you for using this tool. Goodbye!")
             another_option = False
+
     if option == "8":
         print(colorama.Fore.MAGENTA + "You selected option 8:" +colorama.Fore.RED+"'Exit'")
         print(colorama.Fore.GREEN+"Bye!")
         sys.exit() # exit the program
-
-   
     
