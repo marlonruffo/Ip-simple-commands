@@ -18,14 +18,14 @@
  
  #### 2) Digite o IP que gostaria aplicar as ferramentas;
  #### 3) Selecione o tipo de ferramenta deseja utilizar:
-    - 1 Verificar portas abertas 
-    - 2 Verificar a classe do IP
-    - 3 Pingar o IP escolhido
-    - 4 Rastrear o caminho até o IP
-    - 5 Obter o nome do host
-    - 6 Calcular a sub-rede
-    - 7 Obter o endereço MAC
-    - 8 Sair do programa
+    - 1) Verificar portas abertas 
+    - 2) Verificar a classe do IP
+    - 3) Pingar o IP escolhido
+    - 4) Rastrear o caminho até o IP
+    - 5) Obter o nome do host
+    - 6) Calcular a sub-rede
+    - 7) Obter o endereço MAC
+    - 8) Sair do programa
  #### 4) Após utilizar uma ferramenta, escolha se deseja utilizar alguma outra ferramenta ou digitar um novo IP.
  
 
