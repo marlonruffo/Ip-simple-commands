@@ -205,9 +205,9 @@ while another_option: # main loop
             another_option = False
 
     if option == "6":
-        print(colorama.Fore.MAGENTA + "You selected option 6:" +colorama.Fore.RED+"'Number of possible hosts in the target IP's subnet'")
+        print(colorama.Fore.MAGENTA + "You selected option 6:" +colorama.Fore.RED+"'Calculate Subnet'")
         ip=target
-        prefix_lenght = int(input(colorama.Fore.MAGENTA+"Digite o prefixo: ")) # get the prefix lenght
+        prefix_lenght = int(input(colorama.Fore.MAGENTA+"Type the prefix lenght: ")) # get the prefix lenght
         ip_network = ipaddress.IPv4Network((ip,prefix_lenght), strict=False)  # create the network object
         
         
